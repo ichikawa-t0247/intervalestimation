@@ -10,6 +10,8 @@ st.sidebar.markdown('区間推定(母比率)対象のデータを入力してく
 visitors_a = st.sidebar.number_input('分母', value=100)
 conversion_a = st.sidebar.number_input('分子', value=50)
 alpha = st.sidebar.number_input('信頼度', value=0.95)
+sample = st.sidebar.number_input('母比率の幅', value=0.10)
+
 cvr_a = conversion_a / visitors_a
 st.sidebar.markdown(f'比率: **{"{:.1%}".format(cvr_a)}**')
 
@@ -33,11 +35,11 @@ lower_limit = beta.ppf((1-alpha)/2, conversion_a, visitors_a-conversion_a+1)
 upper_limit = beta.ppf(1-(1-alpha)/2, conversion_a+1, visitors_a-conversion_a)
 st.markdown(f'    <center><font size=7 color="#FF4B00"> {lower_limit:.5f}～{upper_limit:.5f}</font></center>', unsafe_allow_html=True)
 
-st.markdown('ベータ分布を利用した母比率の区間推定。(サンプル少ない場合に利用)')
-lower_limit = beta.ppf((1-alpha)/2, conversion_a, visitors_a-conversion_a+1)
-upper_limit = beta.ppf(1-(1-alpha)/2, conversion_a+1, visitors_a-conversion_a)
-st.markdown(f'    <center><font size=7 color="#FF4B00"> {lower_limit:.5f}～{upper_limit:.5f}</font></center>', unsafe_allow_html=True)
-
 st.markdown('正規分布を利用した母比率の区間推定。(サンプル数30以上で利用可能)')
 bottom, up = sp.stats.binom.interval(alpha=alpha, n=conversion_a, p=conversion_a/visitors_a, loc=0)
-st.markdown(f'    <center><font size=7 color="#FF4B00"> {bottom:.5f}～{up:.5f}</font></center>', unsafe_allow_html=True)
+st.markdown(f'<center><font size=7 color="#FF4B00"> {bottom/visitors_a:.5f}～{up/visitors_a:.5f}</font></center>', unsafe_allow_html=True)
+
+
+st.markdown('必要サンプル数')
+bottom, up = sp.stats.norm.interval(alpha, loc=0, scale=1)
+print(pow((2*up*np.sqrt(p*(1-p)))/sample, 2))
