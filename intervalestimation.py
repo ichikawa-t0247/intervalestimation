@@ -25,7 +25,7 @@ st.markdown(rf'''
         <td>A</td><td>{visitors_a}</td><td>{conversion_a}</td><td>{"{:.1%}".format(cvr_a)}</td>
       </tr>
     </table>
-    ''', unsafe_allow_html=True)<br>
+    ''', unsafe_allow_html=True)
 
 st.markdown('ベータ分布を利用した母比率の区間推定。(サンプル少ない場合に利用)')
 lower_limit = beta.ppf((1-alpha)/2, conversion_a, visitors_a-conversion_a+1)
