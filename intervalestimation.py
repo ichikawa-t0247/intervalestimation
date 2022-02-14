@@ -43,4 +43,4 @@ st.markdown(f'<center><font size=7 color="#FF4B00"> {bottom/visitors_a:.5f}～{u
 
 st.markdown('必要サンプル数')
 bottom, up = sp.stats.norm.interval(alpha, loc=0, scale=1)
-st.markdown(f'<center><font size=7 color="#FF4B00"> {numpy.sqrt(p*(1-p))}</font></center>', unsafe_allow_html=True)
+st.markdown(f'<center><font size=7 color="#FF4B00"> {np.sqrt(p)}</font></center>', unsafe_allow_html=True)
