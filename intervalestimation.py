@@ -5,29 +5,23 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy import stats
 sns.set(font_scale=2)
-st.sidebar.markdown('ABテスト対象のデータを入力してください')
-visitors_a = st.sidebar.number_input('AのCLICK数', value=100)
-conversion_a = st.sidebar.number_input('AのCV数', value=50)
+st.sidebar.markdown('区間推定(母比率)対象のデータを入力してください')
+visitors_a = st.sidebar.number_input('分母', value=100)
+conversion_a = st.sidebar.number_input('分子', value=50)
 cvr_a = conversion_a / visitors_a
-st.sidebar.markdown(f'AのCV率: **{"{:.1%}".format(cvr_a)}**')
+st.sidebar.markdown(f'比率: **{"{:.1%}".format(cvr_a)}**')
 
-visitors_b = st.sidebar.number_input('BのCLICK数', value=100)
-conversion_b = st.sidebar.number_input('BのCV数', value=50)
-cvr_b = conversion_b / visitors_b
-st.sidebar.markdown(f'BのCV率: **{"{:.1%}".format(cvr_b)}**')
-st.header('ABテストアプリ')
-st.markdown(r'''ABテスト結果のCLICK数とCV数を入力''')
+
+st.header('区間推定(母比率)アプリ')
+st.markdown(r'''結果の分母と分子を入力''')
 st.subheader('テスト対象')
 st.markdown(rf'''
     <table>
       <tr>
-        <th>パターン</th><th>CLICK数</th><th>CV数</th><th>CV率</th>
+        <th>パターン</th><th>分母</th><th>分子</th><th>比率</th>
       </tr>
       <tr>
         <td>A</td><td>{visitors_a}</td><td>{conversion_a}</td><td>{"{:.1%}".format(cvr_a)}</td>
-      </tr>
-      <tr>
-        <td>B</td><td>{visitors_b}</td><td>{conversion_b}</td><td>{"{:.1%}".format(cvr_b)}</td>
       </tr>
     </table>
     ''', unsafe_allow_html=True)
