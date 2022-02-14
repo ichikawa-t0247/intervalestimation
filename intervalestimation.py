@@ -11,7 +11,7 @@ st.sidebar.markdown('区間推定(母比率)対象のデータを入力してく
 visitors_a = st.sidebar.number_input('分母', value=100)
 conversion_a = st.sidebar.number_input('分子', value=50)
 alpha*100 = st.sidebar.number_input('信頼度(%)', value=95)
-sample*100 = st.sidebar.number_input('母比率の幅', value=10.00)
+sample*100 = st.sidebar.number_input('母比率の幅', value=10)
 
 cvr_a = conversion_a / visitors_a
 st.sidebar.markdown(f'比率: **{"{:.1%}".format(cvr_a)}**')
