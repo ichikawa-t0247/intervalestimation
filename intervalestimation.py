@@ -28,9 +28,6 @@ st.markdown(rf'''
     ''', unsafe_allow_html=True)
 
 st.markdown('ベータ分布を利用した母比率の区間推定。(サンプル少ない場合に利用)')
-alpha = 0.05 # 95%信頼区間
-visitors_a = 17        # 試行回数　
-conversion_a = 17        # 成功回数
 
 lower_limit = beta.ppf((1-alpha)/2, visitors_a, conversion_a-visitors_a+1)
 upper_limit = beta.ppf(1-(1-alpha)/2, visitors_a+1, conversion_a-visitors_a)
