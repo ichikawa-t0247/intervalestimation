@@ -20,7 +20,7 @@ st.sidebar.markdown(f'比率: **{"{:.1%}".format(cvr_a)}**')
 
 st.header('区間推定(母比率)アプリ')
 st.markdown(r'''結果の分母と分子を入力''')
-st.subheader('テスト対象')
+st.subheader('対象')
 st.markdown(rf'''
     <table>
       <tr>
