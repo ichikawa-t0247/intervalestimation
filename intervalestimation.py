@@ -34,7 +34,7 @@ st.markdown(rf'''
 st.markdown('ベータ分布を利用した母比率の区間推定。(サンプル少ない場合に利用)')
 lower_limit = beta.ppf((1-alpha)/2, conversion_a, visitors_a-conversion_a+1)
 upper_limit = beta.ppf(1-(1-alpha)/2, conversion_a+1, visitors_a-conversion_a)
-st.markdown(f'    <center><font size=7 color="#FF4B00"> {lower_limit:.5f}～{upper_limit:.5f}</font></center>', unsafe_allow_html=True)
+st.markdown(f'    <center><font size=7 color="#FF4B00"> {lower_limit:.3%}～{upper_limit:.3%}</font></center>', unsafe_allow_html=True)
 
 st.markdown('正規分布を利用した母比率の区間推定。(サンプル数30以上で利用可能)')
 bottom, up = sp.stats.binom.interval(alpha=alpha, n=visitors_a, p=conversion_a/visitors_a, loc=0)
@@ -42,4 +42,4 @@ st.markdown(f'<center><font size=7 color="#FF4B00"> {bottom/visitors_a:.3%}～{u
 p=conversion_a/visitors_a
 st.markdown('必要サンプル数')
 bottom, up = sp.stats.norm.interval(alpha, loc=0, scale=1)
-st.markdown(f'<center><font size=7 color="#FF4B00"> {pow((2*up*np.sqrt(p*(1-p)))/sample, 2):.1f}</font></center>', unsafe_allow_html=True)
+st.markdown(f'<center><font size=7 color="#FF4B00"> {pow((2*up*np.sqrt(p*(1-p)))/sample, 2):.d}</font></center>', unsafe_allow_html=True)
