@@ -2,6 +2,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import scipy as sp
 import seaborn as sns
 from scipy.stats import beta
 sns.set(font_scale=2)
