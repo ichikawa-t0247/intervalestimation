@@ -32,7 +32,7 @@ st.markdown('ベータ分布を利用した母比率の区間推定。(サンプ
 lower_limit = beta.ppf((1-alpha)/2, visitors_a, conversion_a-visitors_a+1)
 upper_limit = beta.ppf(1-(1-alpha)/2, visitors_a+1, conversion_a-visitors_a)
 
-st.markdown(<center>f' [{lower_limit:.5f}, {upper_limit:.5f}]'</center>)
+st.markdown(f' [{lower_limit:.5f}, {upper_limit:.5f}]')
 st.markdown(r'''
-    <center><font size=7 color="#FF4B00">{lower_limit:.5f}, {upper_limit:.5f}</font></center>
+    <center><font size=7 color="#FF4B00"> [{lower_limit:.5f}, {upper_limit:.5f}]</font></center>
     ''', unsafe_allow_html=True)
