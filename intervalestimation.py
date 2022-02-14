@@ -36,7 +36,7 @@ upper_limit = beta.ppf(1-(1-alpha)/2, conversion_a+1, visitors_a-conversion_a)
 st.markdown(f'    <center><font size=7 color="#FF4B00"> {lower_limit:.5f}～{upper_limit:.5f}</font></center>', unsafe_allow_html=True)
 
 st.markdown('正規分布を利用した母比率の区間推定。(サンプル数30以上で利用可能)')
-bottom, up = sp.stats.binom.interval(alpha=alpha, n=conversion_a, p=conversion_a/visitors_a, loc=0)
+bottom, up = sp.stats.binom.interval(alpha=alpha, n=visitors_a, p=conversion_a/visitors_a, loc=0)
 st.markdown(f'<center><font size=7 color="#FF4B00"> {bottom/visitors_a:.5f}～{up/visitors_a:.5f}</font></center>', unsafe_allow_html=True)
 
 
