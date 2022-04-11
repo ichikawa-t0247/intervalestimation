@@ -32,7 +32,7 @@ st.markdown(rf'''
     </table>
     ''', unsafe_allow_html=True)
 
-st.markdown('ベータ分布を利用した母比率の区間推定。(サンプル少ない場合に利用)')
+st.markdown('ベータ分布を利用した母比率の区間推定1。(サンプル少ない場合に利用)')
 lower_limit = beta.ppf((1-alpha)/2, conversion_a, visitors_a-conversion_a+1)
 upper_limit = beta.ppf(1-(1-alpha)/2, conversion_a+1, visitors_a-conversion_a)
 st.markdown(f'    <center><font size=7 color="#FF4B00"> {lower_limit:.3%}～{upper_limit:.3%}</font></center>', unsafe_allow_html=True)
