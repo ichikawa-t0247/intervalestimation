@@ -37,42 +37,6 @@ lower_limit = beta.ppf((1-alpha)/2, conversion_a, visitors_a-conversion_a+1)
 upper_limit = beta.ppf(1-(1-alpha)/2, conversion_a+1, visitors_a-conversion_a)
 st.markdown(f'    <center><font size=7 color="#FF4B00"> {lower_limit:.3%}～{upper_limit:.3%}</font></center>', unsafe_allow_html=True)
 
-def hmv(xs, ps, alpha=0.95):
-  xps = sorted(zip(xs, ps), key=lambda xp: xp[1], reverse=True)
-  xps = np.array(xps)
-  xs = xps[:, 0]
-  ps = xps[:, 1]
-  return np.sort(xs[np.cumsum(ps) <= alpha])
-thetas = np.linspace(0, 1, 1001)
-
-def posterior(a, N):
-  alpha = a + 1
-  beta = N - a + 1
-  numerator = thetas ** (alpha - 1) * (1 - thetas) ** (beta - 1)
-  return numerator / numerator.sum()
-
-ps = posterior(conversion_a, visitors_a)
-
-hm_thetas = hmv(thetas, ps, alpha=0.95)
-plt.plot(thetas, ps)
-plt.annotate('', xy=(hm_thetas.min(), 0),
-              xytext=(hm_thetas.max(), 0),
-              arrowprops=dict(color='black', shrinkA=0, shrinkB=0,
-                              arrowstyle='<->', linewidth=2))
-plt.annotate('%.3f' % hm_thetas.min(), xy=(hm_thetas.min(), 0),
-              ha='right', va='bottom')
-plt.annotate('%.3f' % hm_thetas.max(), xy=(hm_thetas.max(), 0),
-              ha='left', va='bottom')
-plt.annotate('95% HDI', xy=(hm_thetas.mean(), 0),
-              ha='center', va='bottom')
-hm_region = (hm_thetas.min() < thetas) & (thetas < hm_thetas.max())
-plt.fill_between(thetas[hm_region], ps[hm_region], 0, alpha=0.3)
-plt.xlabel(r'$\theta$')
-plt.ylabel(r'$p(\theta)$')
-plt.xlim(0, 0.3)
-plt.tight_layout()
-plt.show()
-
 
 st.markdown('正規分布を利用した母比率の区間推定。(サンプル数30以上で利用可能)')
 bottom, up = sp.stats.binom.interval(alpha=alpha, n=visitors_a, p=conversion_a/visitors_a, loc=0)
