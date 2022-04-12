@@ -37,6 +37,24 @@ lower_limit = beta.ppf((1-alpha)/2, conversion_a, visitors_a-conversion_a+1)
 upper_limit = beta.ppf(1-(1-alpha)/2, conversion_a+1, visitors_a-conversion_a)
 st.markdown(f'    <center><font size=7 color="#FF4B00"> {lower_limit:.3%}～{upper_limit:.3%}</font></center>', unsafe_allow_html=True)
 
+import numpy as np
+from matplotlib import pyplot as plt
+import pymc3 as pm
+
+plt.style.use('grayscale')
+plt.style.use('seaborn-whitegrid')
+np.random.seed(0)
+
+with pm.Model() as model:
+  theta = pm.Uniform('theta', lower=0, upper=1)
+  # theta = pm.Beta('theta', alpha=1, beta=1)
+  obs = pm.Binomial('a', p=theta, n=visitors_a, observed=conversion_a)
+  trace = pm.sample(5000, chains=2)
+
+with model:
+  pm.plot_posterior(trace, hdi_prob=0.95)
+
+
 
 st.markdown('正規分布を利用した母比率の区間推定。(サンプル数30以上で利用可能)')
 bottom, up = sp.stats.binom.interval(alpha=alpha, n=visitors_a, p=conversion_a/visitors_a, loc=0)
